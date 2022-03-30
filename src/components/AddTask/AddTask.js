@@ -1,23 +1,26 @@
 import { useState } from "react";
-import {v4 as  uuidv4} from "uuid"
+import { v4 as uuidv4 } from "uuid"
 
 export const AddTask = ({ tasks, setTasks }) => {
 
-    const [data, setData] = useState({id:uuidv4(),task:"",date:""})
+    const [data, setData] = useState({ id: uuidv4(), task: "", date: "" })
 
 
 
     const changeTask = (e) => {
-     
 
-        e.target.name === "task" ?  setData((prewState)=>({...prewState,task:e.target.value})) : setData((prewState)=>({...prewState,date:e.target.value}))
-       
+
+        e.target.name === "task" ? setData((prewState) => ({ ...prewState, task: e.target.value })) : setData((prewState) => ({ ...prewState, date: e.target.value }))
+
     }
-    const saveTask =  (e) => {
+    const saveTask = (e) => {
 
-        e.preventDefault()        
-        setTasks(tasks.concat(data))
-        setData({id:uuidv4(),task:"",date:""})
+        e.preventDefault()
+
+        data.date !== "" && data.task !== "" ? setTasks(tasks.concat(data)) :
+            alert("Please enter a Task and Day&Time")
+
+        setData({ id: uuidv4(), task: "", date: "" })
     }
 
     return (
